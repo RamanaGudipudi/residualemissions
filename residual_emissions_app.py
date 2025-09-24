@@ -12,163 +12,114 @@ st.set_page_config(
     layout="wide"
 )
 
-# Apply Streamlit dark theme first
+# Custom CSS for complete dark theme (based on working approach)
 st.markdown("""
 <style>
-    /* Force complete dark mode - fix header area */
-    html, body, [class*="css"] {
-        background-color: #0e1117 !important;
-    }
-    
+    /* Force complete dark theme */
     .stApp {
-        background-color: #0e1117 !important;
-        color: #fafafa !important;
+        background-color: #0e1117;
+        color: #fafafa;
     }
     
-    /* Fix top header area */
-    .stApp > header {
-        background-color: #0e1117 !important;
-    }
-    
-    /* Main content area */
-    .main .block-container {
-        background-color: #0e1117 !important;
-        color: #fafafa !important;
-        padding-top: 1rem;
-    }
-    
-    /* Complete sidebar dark styling */
+    /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background-color: #262730 !important;
-    }
-    
-    section[data-testid="stSidebar"] > div {
-        background-color: #262730 !important;
+        background-color: #262730;
     }
     
     section[data-testid="stSidebar"] * {
         color: #fafafa !important;
-        background-color: transparent !important;
     }
     
-    /* Fix selectbox specifically - multiple approaches */
+    /* Main content */
+    .main .block-container {
+        background-color: #0e1117;
+        color: #fafafa;
+    }
+    
+    /* Headers and text */
+    h1, h2, h3, h4, h5, h6, p, span, div, li, label {
+        color: #fafafa !important;
+    }
+    
+    /* Markdown content */
+    .stMarkdown, .stMarkdown * {
+        color: #fafafa !important;
+    }
+    
+    /* Selectbox - the key fix */
     .stSelectbox label {
         color: #fafafa !important;
     }
     
     .stSelectbox > div > div {
-        background-color: #1e1e1e !important;
-        color: #262730 !important;
-        border: 1px solid #4a4a4a !important;
+        background-color: #fafafa;
+        color: #262730;
+        border: 1px solid #4a4a4a;
     }
     
-    /* Selectbox dropdown text */
-    .stSelectbox [data-baseweb="select"] > div {
-        color: #262730 !important;
-        background-color: #1e1e1e !important;
+    /* Input fields */
+    .stNumberInput input, .stTextInput input {
+        background-color: #262730;
+        color: #fafafa;
+        border: 1px solid #4a4a4a;
     }
     
-    /* Selectbox when opened */
-    .stSelectbox [data-baseweb="popover"] {
-        background-color: #1e1e1e !important;
-    }
-    
-    .stSelectbox [data-baseweb="popover"] * {
-        color: #262730 !important;
-        background-color: #1e1e1e !important;
-    }
-    
-    /* Text elements - comprehensive fix */
-    .stMarkdown, .stMarkdown *, 
-    h1, h2, h3, h4, h5, h6,
-    p, span, div, li, label {
+    .stNumberInput label, .stTextInput label, .stSlider label {
         color: #fafafa !important;
-    }
-    
-    /* Input widgets */
-    .stNumberInput label, 
-    .stSlider label {
-        color: #fafafa !important;
-    }
-    
-    .stNumberInput input {
-        background-color: #262730 !important;
-        color: #fafafa !important;
-        border: 1px solid #4a4a4a !important;
-    }
-    
-    /* Slider styling */
-    .stSlider > div > div > div > div {
-        background-color: #262730 !important;
     }
     
     /* Metrics */
     [data-testid="metric-container"] {
-        background-color: #1e1e1e !important;
-        border: 1px solid #4a4a4a !important;
-        padding: 1rem !important;
-        border-radius: 0.5rem !important;
+        background-color: #1e1e1e;
+        border: 1px solid #4a4a4a;
+        padding: 1rem;
+        border-radius: 0.5rem;
     }
     
     [data-testid="metric-container"] * {
         color: #fafafa !important;
     }
     
-    /* Alert boxes with better contrast */
+    /* Alert boxes */
     .stSuccess {
-        background-color: #0d4f3a !important;
+        background-color: #0d4f3a;
     }
     
     .stError {
-        background-color: #4a1616 !important;
+        background-color: #4a1616;
     }
     
     .stInfo {
-        background-color: #1e3a5f !important;
+        background-color: #1e3a5f;
     }
     
     .stWarning {
-        background-color: #5f4a1e !important;
+        background-color: #5f4a1e;
     }
     
     .stSuccess *, .stError *, .stInfo *, .stWarning * {
         color: #fafafa !important;
     }
     
+    /* Buttons */
+    .stButton button {
+        background-color: #262730;
+        color: #fafafa;
+        border: 1px solid #4a4a4a;
+    }
+    
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: #262730 !important;
-        color: #fafafa !important;
+        background-color: #262730;
+        color: #fafafa;
     }
     
     .streamlit-expanderContent {
-        background-color: #1e1e1e !important;
+        background-color: #1e1e1e;
     }
     
     .streamlit-expanderContent * {
         color: #fafafa !important;
-    }
-    
-    /* Force white text on all containers */
-    [data-testid="stMarkdownContainer"],
-    [data-testid="stMarkdownContainer"] * {
-        color: #fafafa !important;
-    }
-    
-    /* Buttons */
-    .stButton button {
-        background-color: #262730 !important;
-        color: #fafafa !important;
-        border: 1px solid #4a4a4a !important;
-    }
-    
-    .stButton button:hover {
-        background-color: #3a3a4a !important;
-    }
-    
-    /* Fix any remaining white backgrounds */
-    .css-1d391kg, .css-1aumxhk, .css-1v0mbdj {
-        background-color: #0e1117 !important;
     }
 </style>
 """, unsafe_allow_html=True)
