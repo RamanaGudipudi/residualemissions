@@ -1,4 +1,17 @@
-streamlit
-altair
-pandas
-numpy
+# Core Streamlit and visualization libraries
+streamlit>=1.28.0
+plotly>=5.15.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Additional data processing libraries (if needed for future enhancements)
+scipy>=1.10.0
+
+# Optional: For better performance and caching
+pyarrow>=12.0.0
+
+# Pin versions for stability on Streamlit Cloud
+streamlit==1.29.0
+plotly==5.17.0
+pandas==2.1.4
+numpy==1.24.3
