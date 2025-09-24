@@ -12,10 +12,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for dark theme
+# Custom CSS for dark theme - comprehensive coverage
 st.markdown("""
 <style>
-    /* Main app dark theme */
+    /* Global dark theme */
     .stApp {
         background-color: #0E1117 !important;
         color: #FAFAFA !important;
@@ -26,33 +26,36 @@ st.markdown("""
         color: #FAFAFA !important;
     }
     
-    /* Sidebar styling - multiple selectors to ensure coverage */
-    .css-1d391kg, .css-1lcbmhc, .css-17eq0hr, section[data-testid="stSidebar"] {
-        background-color: #262730 !important;
+    /* Force all text to be light colored */
+    * {
         color: #FAFAFA !important;
+    }
+    
+    /* Sidebar comprehensive styling */
+    section[data-testid="stSidebar"] {
+        background-color: #262730 !important;
     }
     
     section[data-testid="stSidebar"] > div {
         background-color: #262730 !important;
-        color: #FAFAFA !important;
     }
     
-    /* Sidebar text and headers */
-    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
-    .css-1lcbmhc h1, .css-1lcbmhc h2, .css-1lcbmhc h3,
+    /* All sidebar content */
+    section[data-testid="stSidebar"] * {
+        color: #FAFAFA !important;
+        background-color: transparent !important;
+    }
+    
+    /* Sidebar specific elements */
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] .stMarkdown *,
     section[data-testid="stSidebar"] h1,
-    section[data-testid="stSidebar"] h2,
-    section[data-testid="stSidebar"] h3 {
-        color: #FAFAFA !important;
-    }
-    
-    /* Sidebar markdown text */
-    .css-1d391kg .markdown-text-container,
-    .css-1lcbmhc .markdown-text-container,
-    section[data-testid="stSidebar"] .markdown-text-container,
+    section[data-testid="stSidebar"] h2, 
+    section[data-testid="stSidebar"] h3,
     section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] li,
-    section[data-testid="stSidebar"] span {
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] div,
+    section[data-testid="stSidebar"] li {
         color: #FAFAFA !important;
     }
     
@@ -60,6 +63,32 @@ st.markdown("""
     .stSelectbox > div > div {
         background-color: #262730 !important;
         color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
+    }
+    
+    .stSelectbox > div > div > div {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Selectbox options when opened */
+    .stSelectbox [data-baseweb="select"] {
+        background-color: #262730 !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] > div {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
+    }
+    
+    /* Override any remaining light backgrounds */
+    [data-baseweb="select"] {
+        background-color: #262730 !important;
+    }
+    
+    [data-baseweb="popover"] {
+        background-color: #262730 !important;
     }
     
     /* Input widgets */
@@ -73,20 +102,22 @@ st.markdown("""
         border: 1px solid #464457 !important;
     }
     
+    /* Text input */
+    .stTextInput > div > div > input {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
+    }
+    
     /* Metric styling */
     [data-testid="metric-container"] {
         background-color: #262730 !important;
         border: 1px solid #464457 !important;
         border-radius: 0.5rem;
         padding: 1rem;
-        color: #FAFAFA !important;
     }
     
-    [data-testid="metric-container"] label {
-        color: #FAFAFA !important;
-    }
-    
-    [data-testid="metric-container"] [data-testid="metric-value"] {
+    [data-testid="metric-container"] * {
         color: #FAFAFA !important;
     }
     
@@ -98,47 +129,78 @@ st.markdown("""
     
     .streamlit-expanderContent {
         background-color: #262730 !important;
+    }
+    
+    .streamlit-expanderContent * {
         color: #FAFAFA !important;
     }
     
-    /* Success/Error/Warning boxes */
+    /* Alert boxes */
     .stAlert > div {
         background-color: #262730 !important;
         border-left: 4px solid #00D4AA !important;
+    }
+    
+    .stAlert > div * {
         color: #FAFAFA !important;
     }
     
     .stSuccess > div {
         background-color: #1B4D3E !important;
         border-left: 4px solid #00D4AA !important;
+    }
+    
+    .stSuccess > div * {
         color: #FAFAFA !important;
     }
     
     .stError > div {
         background-color: #4D1B1B !important;
         border-left: 4px solid #FF4B4B !important;
+    }
+    
+    .stError > div * {
         color: #FAFAFA !important;
     }
     
     .stInfo > div {
         background-color: #1B3A4D !important;
         border-left: 4px solid #1f77b4 !important;
+    }
+    
+    .stInfo > div * {
         color: #FAFAFA !important;
     }
     
     .stWarning > div {
         background-color: #4D3A1B !important;
         border-left: 4px solid #FF8C00 !important;
+    }
+    
+    .stWarning > div * {
         color: #FAFAFA !important;
     }
     
-    /* Headers - all levels */
+    /* Headers */
     h1, h2, h3, h4, h5, h6 {
         color: #FAFAFA !important;
     }
     
-    /* All text elements */
-    p, li, span, div, label {
+    /* Main content markdown */
+    .main .block-container .element-container .stMarkdown {
+        color: #FAFAFA !important;
+    }
+    
+    .main .block-container .element-container .stMarkdown * {
+        color: #FAFAFA !important;
+    }
+    
+    /* All markdown containers */
+    [data-testid="stMarkdownContainer"] {
+        color: #FAFAFA !important;
+    }
+    
+    [data-testid="stMarkdownContainer"] * {
         color: #FAFAFA !important;
     }
     
@@ -158,8 +220,26 @@ st.markdown("""
         color: #FAFAFA !important;
     }
     
-    /* Markdown text specifically */
-    .markdown-text-container {
+    /* Button styling */
+    .stButton > button {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
+    }
+    
+    .stButton > button:hover {
+        background-color: #464457 !important;
+        color: #FAFAFA !important;
+    }
+    
+    .stDownloadButton > button {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
+    }
+    
+    .stDownloadButton > button:hover {
+        background-color: #464457 !important;
         color: #FAFAFA !important;
     }
     
@@ -169,19 +249,29 @@ st.markdown("""
         color: #FAFAFA !important;
     }
     
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        background-color: #262730 !important;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background-color: #262730 !important;
+    /* Override any system colors that might interfere */
+    .css-1v0mbdj, .css-1v0mbdj * {
         color: #FAFAFA !important;
     }
     
-    /* Any remaining white backgrounds */
-    div[data-testid="stMarkdownContainer"] {
+    /* Help text */
+    .stHelp {
         color: #FAFAFA !important;
+    }
+    
+    /* Column content */
+    .css-1r6slb0, .css-1r6slb0 * {
+        color: #FAFAFA !important;
+    }
+    
+    /* Any remaining text elements */
+    p, span, div, li, label, small {
+        color: #FAFAFA !important;
+    }
+    
+    /* Plotly background fix for dark theme */
+    .js-plotly-plot {
+        background-color: #0E1117 !important;
     }
 </style>
 """, unsafe_allow_html=True)
