@@ -15,48 +15,74 @@ st.set_page_config(
 # Apply Streamlit dark theme first
 st.markdown("""
 <style>
-    /* Force Streamlit into dark mode */
+    /* Force complete dark mode - fix header area */
+    html, body, [class*="css"] {
+        background-color: #0e1117 !important;
+    }
+    
     .stApp {
-        background-color: #0e1117;
-        color: #fafafa;
+        background-color: #0e1117 !important;
+        color: #fafafa !important;
+    }
+    
+    /* Fix top header area */
+    .stApp > header {
+        background-color: #0e1117 !important;
     }
     
     /* Main content area */
     .main .block-container {
-        background-color: #0e1117;
-        color: #fafafa;
-    }
-    
-    /* Sidebar dark styling */
-    .css-1d391kg, .css-1d391kg * {
-        background-color: #262730 !important;
+        background-color: #0e1117 !important;
         color: #fafafa !important;
+        padding-top: 1rem;
     }
     
+    /* Complete sidebar dark styling */
     section[data-testid="stSidebar"] {
+        background-color: #262730 !important;
+    }
+    
+    section[data-testid="stSidebar"] > div {
         background-color: #262730 !important;
     }
     
     section[data-testid="stSidebar"] * {
         color: #fafafa !important;
+        background-color: transparent !important;
     }
     
-    /* Text elements - most important fix */
-    .stMarkdown, .stMarkdown *, 
-    h1, h2, h3, h4, h5, h6,
-    p, span, div, li, label {
-        color: #fafafa !important;
-    }
-    
-    /* Selectbox styling */
+    /* Fix selectbox specifically - multiple approaches */
     .stSelectbox label {
         color: #fafafa !important;
     }
     
     .stSelectbox > div > div {
-        background-color: #262730;
-        color: #fafafa;
-        border: 1px solid #4a4a4a;
+        background-color: #1e1e1e !important;
+        color: #262730 !important;
+        border: 1px solid #4a4a4a !important;
+    }
+    
+    /* Selectbox dropdown text */
+    .stSelectbox [data-baseweb="select"] > div {
+        color: #262730 !important;
+        background-color: #1e1e1e !important;
+    }
+    
+    /* Selectbox when opened */
+    .stSelectbox [data-baseweb="popover"] {
+        background-color: #1e1e1e !important;
+    }
+    
+    .stSelectbox [data-baseweb="popover"] * {
+        color: #262730 !important;
+        background-color: #1e1e1e !important;
+    }
+    
+    /* Text elements - comprehensive fix */
+    .stMarkdown, .stMarkdown *, 
+    h1, h2, h3, h4, h5, h6,
+    p, span, div, li, label {
+        color: #fafafa !important;
     }
     
     /* Input widgets */
@@ -66,17 +92,22 @@ st.markdown("""
     }
     
     .stNumberInput input {
-        background-color: #262730;
-        color: #fafafa;
-        border: 1px solid #4a4a4a;
+        background-color: #262730 !important;
+        color: #fafafa !important;
+        border: 1px solid #4a4a4a !important;
+    }
+    
+    /* Slider styling */
+    .stSlider > div > div > div > div {
+        background-color: #262730 !important;
     }
     
     /* Metrics */
     [data-testid="metric-container"] {
-        background-color: #1e1e1e;
-        border: 1px solid #4a4a4a;
-        padding: 1rem;
-        border-radius: 0.5rem;
+        background-color: #1e1e1e !important;
+        border: 1px solid #4a4a4a !important;
+        padding: 1rem !important;
+        border-radius: 0.5rem !important;
     }
     
     [data-testid="metric-container"] * {
@@ -126,9 +157,18 @@ st.markdown("""
     
     /* Buttons */
     .stButton button {
-        background-color: #262730;
-        color: #fafafa;
-        border: 1px solid #4a4a4a;
+        background-color: #262730 !important;
+        color: #fafafa !important;
+        border: 1px solid #4a4a4a !important;
+    }
+    
+    .stButton button:hover {
+        background-color: #3a3a4a !important;
+    }
+    
+    /* Fix any remaining white backgrounds */
+    .css-1d391kg, .css-1aumxhk, .css-1v0mbdj {
+        background-color: #0e1117 !important;
     }
 </style>
 """, unsafe_allow_html=True)
