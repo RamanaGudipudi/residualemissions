@@ -34,11 +34,15 @@ st.markdown("""
 # Title with enhanced introduction
 st.title("🎯 Dynamic Residual Emissions: The Science Behind Industry-Specific Thresholds")
 st.markdown("""
-<div style='background-color: #e8f4f8; padding: 20px; border-radius: 10px; margin-bottom: 20px;'>
-<h3>🔬 Research Frontier 4: Why One-Size-Fits-All Fails</h3>
-Our analysis of corporate net-zero pathways reveals that <strong>static 11% residual thresholds ignore fundamental 
+<div style='background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%); 
+     color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; 
+     border-left: 5px solid #fbbf24; box-shadow: 0 4px 15px rgba(0,0,0,0.1);'>
+<h3 style='color: white; margin-top: 0;'>🔬 Research Frontier 4: Why One-Size-Fits-All Fails</h3>
+<p style='font-size: 16px; line-height: 1.6; margin-bottom: 0; color: #f0f9ff;'>
+Our analysis of corporate net-zero pathways reveals that <strong style='color: #fbbf24;'>static 11% residual thresholds ignore fundamental 
 industry physics and constraints</strong>. This interactive tool demonstrates how RF2 industry-specific pathways 
 should determine RF4 residual emissions—transforming corporate climate action from compliance to authentic decarbonization.
+</p>
 </div>
 """, unsafe_allow_html=True)
 
