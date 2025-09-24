@@ -12,266 +12,123 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for dark theme - comprehensive coverage
+# Apply Streamlit dark theme first
 st.markdown("""
 <style>
-    /* Global dark theme */
+    /* Force Streamlit into dark mode */
     .stApp {
-        background-color: #0E1117 !important;
-        color: #FAFAFA !important;
+        background-color: #0e1117;
+        color: #fafafa;
     }
     
+    /* Main content area */
     .main .block-container {
-        background-color: #0E1117 !important;
-        color: #FAFAFA !important;
+        background-color: #0e1117;
+        color: #fafafa;
     }
     
-    /* Force all text to be light colored */
-    * {
-        color: #FAFAFA !important;
+    /* Sidebar dark styling */
+    .css-1d391kg, .css-1d391kg * {
+        background-color: #262730 !important;
+        color: #fafafa !important;
     }
     
-    /* Sidebar comprehensive styling */
     section[data-testid="stSidebar"] {
         background-color: #262730 !important;
     }
     
-    section[data-testid="stSidebar"] > div {
-        background-color: #262730 !important;
-    }
-    
-    /* All sidebar content */
     section[data-testid="stSidebar"] * {
-        color: #FAFAFA !important;
-        background-color: transparent !important;
+        color: #fafafa !important;
     }
     
-    /* Sidebar specific elements */
-    section[data-testid="stSidebar"] .stMarkdown,
-    section[data-testid="stSidebar"] .stMarkdown *,
-    section[data-testid="stSidebar"] h1,
-    section[data-testid="stSidebar"] h2, 
-    section[data-testid="stSidebar"] h3,
-    section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] span,
-    section[data-testid="stSidebar"] div,
-    section[data-testid="stSidebar"] li {
-        color: #FAFAFA !important;
+    /* Text elements - most important fix */
+    .stMarkdown, .stMarkdown *, 
+    h1, h2, h3, h4, h5, h6,
+    p, span, div, li, label {
+        color: #fafafa !important;
     }
     
     /* Selectbox styling */
+    .stSelectbox label {
+        color: #fafafa !important;
+    }
+    
     .stSelectbox > div > div {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
-    }
-    
-    .stSelectbox > div > div > div {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-    }
-    
-    /* Selectbox options when opened */
-    .stSelectbox [data-baseweb="select"] {
-        background-color: #262730 !important;
-    }
-    
-    .stSelectbox [data-baseweb="select"] > div {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
-    }
-    
-    /* Override any remaining light backgrounds */
-    [data-baseweb="select"] {
-        background-color: #262730 !important;
-    }
-    
-    [data-baseweb="popover"] {
-        background-color: #262730 !important;
+        background-color: #262730;
+        color: #fafafa;
+        border: 1px solid #4a4a4a;
     }
     
     /* Input widgets */
-    .stSlider > div > div > div {
-        background-color: #262730 !important;
+    .stNumberInput label, 
+    .stSlider label {
+        color: #fafafa !important;
     }
     
-    .stNumberInput > div > div > input {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
+    .stNumberInput input {
+        background-color: #262730;
+        color: #fafafa;
+        border: 1px solid #4a4a4a;
     }
     
-    /* Text input */
-    .stTextInput > div > div > input {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
-    }
-    
-    /* Metric styling */
+    /* Metrics */
     [data-testid="metric-container"] {
-        background-color: #262730 !important;
-        border: 1px solid #464457 !important;
-        border-radius: 0.5rem;
+        background-color: #1e1e1e;
+        border: 1px solid #4a4a4a;
         padding: 1rem;
+        border-radius: 0.5rem;
     }
     
     [data-testid="metric-container"] * {
-        color: #FAFAFA !important;
+        color: #fafafa !important;
     }
     
-    /* Expander styling */
+    /* Alert boxes with better contrast */
+    .stSuccess {
+        background-color: #0d4f3a !important;
+    }
+    
+    .stError {
+        background-color: #4a1616 !important;
+    }
+    
+    .stInfo {
+        background-color: #1e3a5f !important;
+    }
+    
+    .stWarning {
+        background-color: #5f4a1e !important;
+    }
+    
+    .stSuccess *, .stError *, .stInfo *, .stWarning * {
+        color: #fafafa !important;
+    }
+    
+    /* Expanders */
     .streamlit-expanderHeader {
         background-color: #262730 !important;
-        color: #FAFAFA !important;
+        color: #fafafa !important;
     }
     
     .streamlit-expanderContent {
-        background-color: #262730 !important;
+        background-color: #1e1e1e !important;
     }
     
     .streamlit-expanderContent * {
-        color: #FAFAFA !important;
+        color: #fafafa !important;
     }
     
-    /* Alert boxes */
-    .stAlert > div {
-        background-color: #262730 !important;
-        border-left: 4px solid #00D4AA !important;
-    }
-    
-    .stAlert > div * {
-        color: #FAFAFA !important;
-    }
-    
-    .stSuccess > div {
-        background-color: #1B4D3E !important;
-        border-left: 4px solid #00D4AA !important;
-    }
-    
-    .stSuccess > div * {
-        color: #FAFAFA !important;
-    }
-    
-    .stError > div {
-        background-color: #4D1B1B !important;
-        border-left: 4px solid #FF4B4B !important;
-    }
-    
-    .stError > div * {
-        color: #FAFAFA !important;
-    }
-    
-    .stInfo > div {
-        background-color: #1B3A4D !important;
-        border-left: 4px solid #1f77b4 !important;
-    }
-    
-    .stInfo > div * {
-        color: #FAFAFA !important;
-    }
-    
-    .stWarning > div {
-        background-color: #4D3A1B !important;
-        border-left: 4px solid #FF8C00 !important;
-    }
-    
-    .stWarning > div * {
-        color: #FAFAFA !important;
-    }
-    
-    /* Headers */
-    h1, h2, h3, h4, h5, h6 {
-        color: #FAFAFA !important;
-    }
-    
-    /* Main content markdown */
-    .main .block-container .element-container .stMarkdown {
-        color: #FAFAFA !important;
-    }
-    
-    .main .block-container .element-container .stMarkdown * {
-        color: #FAFAFA !important;
-    }
-    
-    /* All markdown containers */
-    [data-testid="stMarkdownContainer"] {
-        color: #FAFAFA !important;
-    }
-    
+    /* Force white text on all containers */
+    [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] * {
-        color: #FAFAFA !important;
+        color: #fafafa !important;
     }
     
-    /* DataFrame styling */
-    .dataframe {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-    }
-    
-    .dataframe th {
-        background-color: #1E1E1E !important;
-        color: #FAFAFA !important;
-    }
-    
-    .dataframe td {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-    }
-    
-    /* Button styling */
-    .stButton > button {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
-    }
-    
-    .stButton > button:hover {
-        background-color: #464457 !important;
-        color: #FAFAFA !important;
-    }
-    
-    .stDownloadButton > button {
-        background-color: #262730 !important;
-        color: #FAFAFA !important;
-        border: 1px solid #464457 !important;
-    }
-    
-    .stDownloadButton > button:hover {
-        background-color: #464457 !important;
-        color: #FAFAFA !important;
-    }
-    
-    /* Code blocks */
-    .stCodeBlock {
-        background-color: #1E1E1E !important;
-        color: #FAFAFA !important;
-    }
-    
-    /* Override any system colors that might interfere */
-    .css-1v0mbdj, .css-1v0mbdj * {
-        color: #FAFAFA !important;
-    }
-    
-    /* Help text */
-    .stHelp {
-        color: #FAFAFA !important;
-    }
-    
-    /* Column content */
-    .css-1r6slb0, .css-1r6slb0 * {
-        color: #FAFAFA !important;
-    }
-    
-    /* Any remaining text elements */
-    p, span, div, li, label, small {
-        color: #FAFAFA !important;
-    }
-    
-    /* Plotly background fix for dark theme */
-    .js-plotly-plot {
-        background-color: #0E1117 !important;
+    /* Buttons */
+    .stButton button {
+        background-color: #262730;
+        color: #fafafa;
+        border: 1px solid #4a4a4a;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -462,9 +319,11 @@ with col1:
         yaxis_title="Residual Emissions (%)",
         height=300,
         showlegend=False,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     fig_static.add_annotation(
@@ -473,7 +332,7 @@ with col1:
         showarrow=True,
         arrowhead=2,
         arrowcolor="#FF4B4B",
-        font=dict(color='#FAFAFA')
+        font=dict(color='#fafafa')
     )
     
     st.plotly_chart(fig_static, use_container_width=True)
@@ -519,9 +378,11 @@ with col2:
         yaxis_title="Residual Emissions (%)",
         height=300,
         showlegend=False,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     st.plotly_chart(fig_dynamic, use_container_width=True)
@@ -637,7 +498,7 @@ fig_decomp.add_trace(go.Scatter(
     y=benchmark_values,
     mode='lines',
     name='Evolution of Industry-Specific Benchmark',
-    line=dict(color='#FAFAFA', width=3, dash='dash'),
+    line=dict(color='#fafafa', width=3, dash='dash'),
     hovertemplate='<b>Industry Benchmark</b><br>Year: %{x}<br>Threshold: %{y:.0f} MtCO₂e<extra></extra>'
 ))
 
@@ -647,9 +508,11 @@ fig_decomp.update_layout(
     yaxis_title="MtCO₂e (Positive = Emissions, Negative = Removals)",
     height=600,
     barmode='relative',
-    paper_bgcolor='#0E1117',
-    plot_bgcolor='#0E1117',
-    font=dict(color='#FAFAFA'),
+    paper_bgcolor='#0e1117',
+    plot_bgcolor='#0e1117',
+    font=dict(color='#fafafa'),
+    xaxis=dict(color='#fafafa', gridcolor='#444444'),
+    yaxis=dict(color='#fafafa', gridcolor='#444444'),
     legend=dict(
         orientation="v",
         yanchor="top",
@@ -658,7 +521,8 @@ fig_decomp.update_layout(
         x=1.05,
         bgcolor='rgba(38, 39, 48, 0.8)',
         bordercolor='#464457',
-        borderwidth=1
+        borderwidth=1,
+        font=dict(color='#fafafa')
     )
 )
 
@@ -668,8 +532,8 @@ fig_decomp.add_annotation(
     text="Planetary boundaries<br>Technology evolution &<br>Limits of growth",
     showarrow=True,
     arrowhead=2,
-    arrowcolor="#FAFAFA",
-    font=dict(color='#FAFAFA', size=10),
+    arrowcolor="#fafafa",
+    font=dict(color='#fafafa', size=10),
     bgcolor='rgba(38, 39, 48, 0.8)',
     bordercolor='#464457',
     borderwidth=1
@@ -728,15 +592,16 @@ with complexity_col1:
             radialaxis=dict(
                 visible=True,
                 range=[0, 10],
-                color='#FAFAFA'
+                color='#fafafa',
+                gridcolor='#444444'
             ),
-            angularaxis=dict(color='#FAFAFA')
+            angularaxis=dict(color='#fafafa', gridcolor='#444444')
         ),
         title="Industry Complexity Factors (Higher = More Challenging)",
         height=400,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa')
     )
     
     st.plotly_chart(fig_radar, use_container_width=True)
@@ -814,9 +679,11 @@ with scenario_col2:
         title=f"{selected_industry} Residual Emissions by Scenario",
         yaxis_title="Residual Emissions (%)",
         height=300,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     # Add annotations showing the range
@@ -857,9 +724,11 @@ with impact_col1:
     fig_removals.update_layout(
         title="Required Carbon Removals (tCO2e/year)", 
         showlegend=False,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     st.plotly_chart(fig_removals, use_container_width=True)
@@ -930,7 +799,7 @@ with col1:
             mode='markers',
             marker=dict(
                 size=df_subset['size'],
-                color=colors.get(scalability, '#FAFAFA'),
+                color=colors.get(scalability, '#fafafa'),
                 opacity=0.7
             ),
             text=df_subset['name'],
@@ -942,9 +811,11 @@ with col1:
         title="Intervention Potential vs Timeline",
         xaxis_title="Implementation Timeline (years)",
         yaxis_title="Emission Reduction Potential (%)",
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     st.plotly_chart(fig_interventions, use_container_width=True)
@@ -986,9 +857,11 @@ with urgency_col1:
         xaxis_title="Scope 3 Dominance (%)",
         yaxis_title="Static Threshold Gap (percentage points)",
         height=400,
-        paper_bgcolor='#0E1117',
-        plot_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA')
+        paper_bgcolor='#0e1117',
+        plot_bgcolor='#0e1117',
+        font=dict(color='#fafafa'),
+        xaxis=dict(color='#fafafa', gridcolor='#444444'),
+        yaxis=dict(color='#fafafa', gridcolor='#444444')
     )
     
     # Add quadrant annotations
@@ -1001,7 +874,7 @@ with urgency_col1:
         bgcolor="rgba(211, 47, 47, 0.8)", 
         bordercolor="#FF4B4B", 
         borderwidth=1,
-        font=dict(color='#FAFAFA')
+        font=dict(color='#fafafa')
     )
     
     st.plotly_chart(fig_urgency, use_container_width=True)
@@ -1099,9 +972,12 @@ fig_timeline.update_layout(
     yaxis_title="Residual Emissions (%)",
     height=500,
     hovermode='x unified',
-    paper_bgcolor='#0E1117',
-    plot_bgcolor='#0E1117',
-    font=dict(color='#FAFAFA')
+    paper_bgcolor='#0e1117',
+    plot_bgcolor='#0e1117',
+    font=dict(color='#fafafa'),
+    xaxis=dict(color='#fafafa', gridcolor='#444444'),
+    yaxis=dict(color='#fafafa', gridcolor='#444444'),
+    legend=dict(font=dict(color='#fafafa'))
 )
 
 # Add key milestone annotations
@@ -1110,7 +986,7 @@ fig_timeline.add_annotation(
     text="2030: Technology<br>deployment accelerates",
     showarrow=True,
     arrowhead=2,
-    font=dict(color='#FAFAFA')
+    font=dict(color='#fafafa')
 )
 
 fig_timeline.add_annotation(
@@ -1118,7 +994,7 @@ fig_timeline.add_annotation(
     text="2040: Maximum potential<br>constraints emerge",
     showarrow=True,
     arrowhead=2,
-    font=dict(color='#FAFAFA')
+    font=dict(color='#fafafa')
 )
 
 st.plotly_chart(fig_timeline, use_container_width=True)
