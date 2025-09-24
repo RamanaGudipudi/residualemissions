@@ -15,56 +15,173 @@ st.set_page_config(
 # Custom CSS for dark theme
 st.markdown("""
 <style>
-    /* Dark theme styling */
+    /* Main app dark theme */
     .stApp {
-        background-color: #0E1117;
-        color: #FAFAFA;
+        background-color: #0E1117 !important;
+        color: #FAFAFA !important;
     }
     
     .main .block-container {
-        background-color: #0E1117;
-        color: #FAFAFA;
+        background-color: #0E1117 !important;
+        color: #FAFAFA !important;
     }
     
-    /* Sidebar styling */
-    .css-1d391kg {
-        background-color: #262730;
+    /* Sidebar styling - multiple selectors to ensure coverage */
+    .css-1d391kg, .css-1lcbmhc, .css-17eq0hr, section[data-testid="stSidebar"] {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    section[data-testid="stSidebar"] > div {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Sidebar text and headers */
+    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
+    .css-1lcbmhc h1, .css-1lcbmhc h2, .css-1lcbmhc h3,
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {
+        color: #FAFAFA !important;
+    }
+    
+    /* Sidebar markdown text */
+    .css-1d391kg .markdown-text-container,
+    .css-1lcbmhc .markdown-text-container,
+    section[data-testid="stSidebar"] .markdown-text-container,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] li,
+    section[data-testid="stSidebar"] span {
+        color: #FAFAFA !important;
+    }
+    
+    /* Selectbox styling */
+    .stSelectbox > div > div {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Input widgets */
+    .stSlider > div > div > div {
+        background-color: #262730 !important;
+    }
+    
+    .stNumberInput > div > div > input {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #464457 !important;
     }
     
     /* Metric styling */
     [data-testid="metric-container"] {
-        background-color: #262730;
-        border: 1px solid #464457;
+        background-color: #262730 !important;
+        border: 1px solid #464457 !important;
         border-radius: 0.5rem;
         padding: 1rem;
+        color: #FAFAFA !important;
+    }
+    
+    [data-testid="metric-container"] label {
+        color: #FAFAFA !important;
+    }
+    
+    [data-testid="metric-container"] [data-testid="metric-value"] {
+        color: #FAFAFA !important;
     }
     
     /* Expander styling */
     .streamlit-expanderHeader {
-        background-color: #262730;
-        color: #FAFAFA;
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    .streamlit-expanderContent {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
     }
     
     /* Success/Error/Warning boxes */
     .stAlert > div {
-        background-color: #262730;
-        border-left: 4px solid #00D4AA;
+        background-color: #262730 !important;
+        border-left: 4px solid #00D4AA !important;
+        color: #FAFAFA !important;
     }
     
-    /* Headers */
+    .stSuccess > div {
+        background-color: #1B4D3E !important;
+        border-left: 4px solid #00D4AA !important;
+        color: #FAFAFA !important;
+    }
+    
+    .stError > div {
+        background-color: #4D1B1B !important;
+        border-left: 4px solid #FF4B4B !important;
+        color: #FAFAFA !important;
+    }
+    
+    .stInfo > div {
+        background-color: #1B3A4D !important;
+        border-left: 4px solid #1f77b4 !important;
+        color: #FAFAFA !important;
+    }
+    
+    .stWarning > div {
+        background-color: #4D3A1B !important;
+        border-left: 4px solid #FF8C00 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Headers - all levels */
     h1, h2, h3, h4, h5, h6 {
-        color: #FAFAFA;
+        color: #FAFAFA !important;
     }
     
-    /* Text */
-    p, li, span {
-        color: #FAFAFA;
+    /* All text elements */
+    p, li, span, div, label {
+        color: #FAFAFA !important;
     }
     
-    /* DataFrame */
+    /* DataFrame styling */
     .dataframe {
-        background-color: #262730;
-        color: #FAFAFA;
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    .dataframe th {
+        background-color: #1E1E1E !important;
+        color: #FAFAFA !important;
+    }
+    
+    .dataframe td {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Markdown text specifically */
+    .markdown-text-container {
+        color: #FAFAFA !important;
+    }
+    
+    /* Code blocks */
+    .stCodeBlock {
+        background-color: #1E1E1E !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background-color: #262730 !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background-color: #262730 !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Any remaining white backgrounds */
+    div[data-testid="stMarkdownContainer"] {
+        color: #FAFAFA !important;
     }
 </style>
 """, unsafe_allow_html=True)
