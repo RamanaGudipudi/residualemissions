@@ -5,121 +5,20 @@ import pandas as pd
 import numpy as np
 from plotly.subplots import make_subplots
 
-# Set page config with dark theme
+# Set page config - use built-in dark theme
 st.set_page_config(
     page_title="Dynamic Residual Emissions: Why Static 11% Thresholds Fail",
     page_icon="🎯",
     layout="wide"
 )
 
-# Custom CSS for complete dark theme (based on working approach)
+# Simple, minimal CSS - just for essential fixes
 st.markdown("""
 <style>
-    /* Force complete dark theme */
-    .stApp {
-        background-color: #0e1117;
-        color: #fafafa;
-    }
-    
-    /* Sidebar styling */
-    section[data-testid="stSidebar"] {
-        background-color: #262730;
-    }
-    
-    section[data-testid="stSidebar"] * {
-        color: #fafafa !important;
-    }
-    
-    /* Main content */
-    .main .block-container {
-        background-color: #0e1117;
-        color: #fafafa;
-    }
-    
-    /* Headers and text */
-    h1, h2, h3, h4, h5, h6, p, span, div, li, label {
-        color: #fafafa !important;
-    }
-    
-    /* Markdown content */
-    .stMarkdown, .stMarkdown * {
-        color: #fafafa !important;
-    }
-    
-    /* Selectbox - the key fix */
-    .stSelectbox label {
-        color: #fafafa !important;
-    }
-    
+    /* Minimal styling - let Streamlit handle the theme */
     .stSelectbox > div > div {
-        background-color: #fafafa;
-        color: #262730;
-        border: 1px solid #4a4a4a;
-    }
-    
-    /* Input fields */
-    .stNumberInput input, .stTextInput input {
-        background-color: #262730;
-        color: #fafafa;
-        border: 1px solid #4a4a4a;
-    }
-    
-    .stNumberInput label, .stTextInput label, .stSlider label {
-        color: #fafafa !important;
-    }
-    
-    /* Metrics */
-    [data-testid="metric-container"] {
-        background-color: #1e1e1e;
-        border: 1px solid #4a4a4a;
-        padding: 1rem;
-        border-radius: 0.5rem;
-    }
-    
-    [data-testid="metric-container"] * {
-        color: #fafafa !important;
-    }
-    
-    /* Alert boxes */
-    .stSuccess {
-        background-color: #0d4f3a;
-    }
-    
-    .stError {
-        background-color: #4a1616;
-    }
-    
-    .stInfo {
-        background-color: #1e3a5f;
-    }
-    
-    .stWarning {
-        background-color: #5f4a1e;
-    }
-    
-    .stSuccess *, .stError *, .stInfo *, .stWarning * {
-        color: #fafafa !important;
-    }
-    
-    /* Buttons */
-    .stButton button {
-        background-color: #262730;
-        color: #fafafa;
-        border: 1px solid #4a4a4a;
-    }
-    
-    /* Expanders */
-    .streamlit-expanderHeader {
-        background-color: #262730;
-        color: #fafafa;
-    }
-    
-    .streamlit-expanderContent {
-        background-color: #1e1e1e;
-    }
-    
-    .streamlit-expanderContent * {
-        color: #fafafa !important;
+        color: #000000 !important;
+        background-color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -269,7 +168,7 @@ residual_industry_data = {
     }
 }
 
-# Sidebar for industry selection with enhanced information
+# Sidebar for industry selection
 st.sidebar.header("🏭 Select Industry for Analysis")
 st.sidebar.markdown("*Based on CDP disclosure data and SBTi guidance analysis*")
 
@@ -296,7 +195,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.error("**Current SBTi Approach: One-Size-Fits-All**")
     
-    # Create static comparison chart with dark theme
+    # Create static comparison chart
     industries = list(residual_industry_data.keys())
     static_values = [11] * len(industries)
     
@@ -309,12 +208,7 @@ with col1:
         title="SBTi Static Residuals",
         yaxis_title="Residual Emissions (%)",
         height=300,
-        showlegend=False,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
+        showlegend=False
     )
     
     fig_static.add_annotation(
@@ -322,8 +216,7 @@ with col1:
         text="Same threshold<br>for all industries!",
         showarrow=True,
         arrowhead=2,
-        arrowcolor="#FF4B4B",
-        font=dict(color='#fafafa')
+        arrowcolor="#FF4B4B"
     )
     
     st.plotly_chart(fig_static, use_container_width=True)
@@ -339,7 +232,7 @@ with col1:
 with col2:
     st.success("**RF2 Dynamic Approach: Industry-Specific Reality**")
     
-    # Create dynamic comparison chart showing illustrative ranges with dark theme
+    # Create dynamic comparison chart showing ranges
     industries = list(residual_industry_data.keys())
     conservative_residuals = [100 - data['illustrative_scenarios']['conservative_max_reduction'] 
                             for data in residual_industry_data.values()]
@@ -368,12 +261,7 @@ with col2:
         title="RF2 Industry-Specific Residuals",
         yaxis_title="Residual Emissions (%)",
         height=300,
-        showlegend=False,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
+        showlegend=False
     )
     
     st.plotly_chart(fig_dynamic, use_container_width=True)
@@ -386,14 +274,14 @@ with col2:
     - ✅ Enables authentic climate planning
     """)
 
-# NEW: Dynamic Emissions Decomposition Visualization (from Figure 4)
+# Dynamic Emissions Decomposition Visualization
 st.subheader("📊 Dynamic Emissions Decomposition: The Heart of RF4")
 st.markdown("""
 **This visualization shows how genuine decarbonization differs from accounting artifacts - 
 the core insight that RF4 research framework enables.**
 """)
 
-# Create the stacked bar chart similar to Figure 4
+# Create the stacked bar chart
 def create_emissions_decomposition():
     years = [2030, 2035, 2040, 2045, 2050]
     company_baseline = 1000  # MtCO2e baseline
@@ -406,21 +294,21 @@ def create_emissions_decomposition():
     for i, year in enumerate(years):
         year_growth = cumulative_growth * (1 + growth_rate) ** (5 * i) if i > 0 else 1.0
         
-        # Unabated growth emissions (light blue/grey)
+        # Unabated growth emissions
         unabated_growth = company_baseline * (year_growth - 1) * (1 - decarbonization_efficiency)
         
-        # Genuine decarbonization (dark green) - negative values
+        # Genuine decarbonization - negative values
         genuine_decarb = -company_baseline * (year_growth - 1) * decarbonization_efficiency
         
-        # Dynamic residual emissions (orange) - increasing over time
+        # Dynamic residual emissions - increasing over time
         base_residual = company_baseline * 0.11  # Static baseline
         dynamic_multiplier = 1 + 0.6 * (i / 4)  # Increasing residual needs
         dynamic_residual = base_residual * dynamic_multiplier
         
-        # Carbon removals (light green) to balance residuals
+        # Carbon removals to balance residuals
         carbon_removals = dynamic_residual
         
-        # Growth limits alert (red) - showing unsustainability
+        # Growth limits alert - showing unsustainability
         growth_limits = -company_baseline * 0.15 * (i / 2) if i > 2 else 0
         
         data.append({
@@ -489,45 +377,23 @@ fig_decomp.add_trace(go.Scatter(
     y=benchmark_values,
     mode='lines',
     name='Evolution of Industry-Specific Benchmark',
-    line=dict(color='#fafafa', width=3, dash='dash'),
+    line=dict(color='#000000', width=3, dash='dash'),
     hovertemplate='<b>Industry Benchmark</b><br>Year: %{x}<br>Threshold: %{y:.0f} MtCO₂e<extra></extra>'
 ))
 
 fig_decomp.update_layout(
-    title=f"Industry-specific Net-Zero Transition Pathway with Dynamic Benchmarks (2030-2050)<br><sub>{selected_industry} company emissions decomposition with scenario-dependent removal requirements</sub>",
+    title=f"Industry-specific Net-Zero Transition Pathway with Dynamic Benchmarks (2030-2050)<br><sub>{selected_industry} company emissions decomposition</sub>",
     xaxis_title="Year",
     yaxis_title="MtCO₂e (Positive = Emissions, Negative = Removals)",
     height=600,
     barmode='relative',
-    paper_bgcolor='#0e1117',
-    plot_bgcolor='#0e1117',
-    font=dict(color='#fafafa'),
-    xaxis=dict(color='#fafafa', gridcolor='#444444'),
-    yaxis=dict(color='#fafafa', gridcolor='#444444'),
     legend=dict(
         orientation="v",
         yanchor="top",
         y=1,
         xanchor="left",
-        x=1.05,
-        bgcolor='rgba(38, 39, 48, 0.8)',
-        bordercolor='#464457',
-        borderwidth=1,
-        font=dict(color='#fafafa')
+        x=1.05
     )
-)
-
-# Add annotations
-fig_decomp.add_annotation(
-    x=2042, y=800,
-    text="Planetary boundaries<br>Technology evolution &<br>Limits of growth",
-    showarrow=True,
-    arrowhead=2,
-    arrowcolor="#fafafa",
-    font=dict(color='#fafafa', size=10),
-    bgcolor='rgba(38, 39, 48, 0.8)',
-    bordercolor='#464457',
-    borderwidth=1
 )
 
 st.plotly_chart(fig_decomp, use_container_width=True)
@@ -539,77 +405,7 @@ constraints tighten and residual emissions naturally increase. The RF4 framework
 dynamic, science-based thresholds that evolve with technological progress and planetary boundaries.
 """)
 
-# Continue with rest of the app (industry complexity overview)
-st.subheader(f"🔬 Deep Dive: {selected_industry} Residual Emissions Analysis")
-
-# Industry complexity overview with fixed DataFrame handling
-complexity_col1, complexity_col2 = st.columns([2, 1])
-
-with complexity_col1:
-    st.markdown("### RF2 Complexity Factors")
-    
-    complexity_data = selected_data['rf2_complexity']
-    
-    # Create a complexity radar chart with proper data handling
-    categories = [key.replace('_', ' ').title() for key in complexity_data.keys() if key != 'main_challenge']
-    
-    # Convert complexity descriptions to scores for visualization
-    complexity_scores = []
-    for key, value in complexity_data.items():
-        if key == 'main_challenge':
-            continue
-        # Simple scoring based on text complexity indicators
-        value_str = str(value).lower()
-        if any(word in value_str for word in ['none', 'limited', 'impossible', 'cannot']):
-            score = 8  # High complexity
-        elif any(word in value_str for word in ['medium', 'some', 'partial', 'varies']):
-            score = 5  # Medium complexity
-        elif any(word in value_str for word in ['high', 'full', 'direct', 'easy']):
-            score = 2  # Low complexity (good for decarbonization)
-        else:
-            score = 6  # Default medium-high
-        complexity_scores.append(score)
-    
-    fig_radar = go.Figure(data=go.Scatterpolar(
-        r=complexity_scores,
-        theta=categories,
-        fill='toself',
-        name=f'{selected_industry} Complexity',
-        line_color='#00D4AA'
-    ))
-    
-    fig_radar.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10],
-                color='#fafafa',
-                gridcolor='#444444'
-            ),
-            angularaxis=dict(color='#fafafa', gridcolor='#444444')
-        ),
-        title="Industry Complexity Factors (Higher = More Challenging)",
-        height=400,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa')
-    )
-    
-    st.plotly_chart(fig_radar, use_container_width=True)
-
-with complexity_col2:
-    st.markdown("### Key Challenge")
-    st.info(f"**{complexity_data['main_challenge']}**")
-    
-    st.markdown("### Scope 3 Categories")
-    for category in selected_data['scope3_categories']:
-        st.write(f"• {category}")
-    
-    st.markdown("### Residual Drivers")
-    for driver in selected_data['residual_drivers']:
-        st.write(f"🔸 {driver}")
-
-# Interactive scenario builder with fixed DataFrame handling
+# Interactive scenario builder
 st.subheader("🎮 Interactive Scenario Builder: What IF We Had RF2 Data?")
 
 st.markdown(f"""
@@ -657,7 +453,7 @@ with scenario_col2:
     breakthrough_residual = 100 - breakthrough_reduction
     static_residual = 11
     
-    # Create residual comparison with dark theme
+    # Create residual comparison
     scenarios = ['SBTi Static', 'Conservative RF2', 'Ambitious RF2', 'Breakthrough RF2']
     residuals = [static_residual, conservative_residual, ambitious_residual, breakthrough_residual]
     colors = ['#FF4B4B', '#FF8C00', '#00D4AA', '#1f77b4']
@@ -669,12 +465,7 @@ with scenario_col2:
     fig_scenarios.update_layout(
         title=f"{selected_industry} Residual Emissions by Scenario",
         yaxis_title="Residual Emissions (%)",
-        height=300,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
+        height=300
     )
     
     # Add annotations showing the range
@@ -686,309 +477,6 @@ with scenario_col2:
     )
     
     st.plotly_chart(fig_scenarios, use_container_width=True)
-
-# Impact analysis with dark theme
-st.subheader("📊 The Impact of Dynamic vs. Static Residuals")
-
-impact_col1, impact_col2 = st.columns(2)
-
-with impact_col1:
-    st.markdown("### Carbon Removal Requirements")
-    
-    # Assume a hypothetical company size for calculation
-    company_emissions = st.number_input("Hypothetical Company Baseline Emissions (tCO2e/year)", 
-                                       min_value=1000, max_value=10000000, value=100000, step=10000)
-    
-    static_removals = company_emissions * (static_residual / 100)
-    conservative_removals = company_emissions * (conservative_residual / 100)
-    ambitious_removals = company_emissions * (ambitious_residual / 100)
-    breakthrough_removals = company_emissions * (breakthrough_residual / 100)
-    
-    removal_scenarios = ['SBTi Static', 'Conservative RF2', 'Ambitious RF2', 'Breakthrough RF2']
-    removal_values = [static_removals, conservative_removals, ambitious_removals, breakthrough_removals]
-    removal_colors = ['#FF4B4B', '#FF8C00', '#00D4AA', '#1f77b4']
-    
-    fig_removals = go.Figure(data=[
-        go.Bar(x=removal_scenarios, y=removal_values, marker_color=removal_colors)
-    ])
-    
-    fig_removals.update_layout(
-        title="Required Carbon Removals (tCO2e/year)", 
-        showlegend=False,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
-    )
-    
-    st.plotly_chart(fig_removals, use_container_width=True)
-
-with impact_col2:
-    st.markdown("### Financial Impact Analysis")
-    
-    removal_cost = st.slider("Carbon Removal Cost ($/tCO2)", 100, 1000, 400, step=50,
-                            help="Current engineered removal costs range $400-600/tCO2")
-    
-    static_cost = static_removals * removal_cost
-    conservative_cost = conservative_removals * removal_cost
-    ambitious_cost = ambitious_removals * removal_cost
-    breakthrough_cost = breakthrough_removals * removal_cost
-    
-    st.metric("SBTi Static Annual Cost", f"${static_cost:,.0f}")
-    st.metric("Conservative RF2 Cost", f"${conservative_cost:,.0f}", 
-             delta=f"{conservative_cost - static_cost:,.0f}")
-    st.metric("Ambitious RF2 Cost", f"${ambitious_cost:,.0f}", 
-             delta=f"{ambitious_cost - static_cost:,.0f}")
-    st.metric("Breakthrough RF2 Cost", f"${breakthrough_cost:,.0f}", 
-             delta=f"{breakthrough_cost - static_cost:,.0f}")
-
-# Key interventions analysis with fixed DataFrame handling
-st.subheader("🛠️ Decarbonization Intervention Analysis")
-
-# Create DataFrame with proper structure for plotly
-intervention_list = selected_data['key_interventions']
-intervention_df = pd.DataFrame(intervention_list)
-
-# Extract numeric values from potential ranges
-def extract_mid_value(range_str):
-    """Extract middle value from range like '30-50%' -> 40"""
-    if '-' in range_str:
-        parts = range_str.replace('%', '').split('-')
-        return (int(parts[0]) + int(parts[1])) / 2
-    return 40  # default
-
-intervention_df['potential_numeric'] = intervention_df['potential'].apply(extract_mid_value)
-
-# Extract timeline years
-def extract_timeline_years(timeline_str):
-    """Extract average years from timeline like '5-10 years' -> 7.5"""
-    if '-' in timeline_str:
-        parts = timeline_str.replace(' years', '').split('-')
-        return (int(parts[0]) + int(parts[1])) / 2
-    return 5  # default
-
-intervention_df['timeline_numeric'] = intervention_df['timeline'].apply(extract_timeline_years)
-
-# Map scalability to sizes
-scalability_sizes = {'High': 20, 'Medium': 15, 'Low': 10, 'Variable': 12}
-intervention_df['size'] = intervention_df['scalability'].map(scalability_sizes)
-
-col1, col2 = st.columns(2)
-
-with col1:
-    # Intervention potential vs timeline with fixed DataFrame
-    fig_interventions = go.Figure()
-    
-    colors = {'High': '#00D4AA', 'Medium': '#FF8C00', 'Low': '#FF4B4B', 'Variable': '#1f77b4'}
-    
-    for scalability in intervention_df['scalability'].unique():
-        df_subset = intervention_df[intervention_df['scalability'] == scalability]
-        fig_interventions.add_trace(go.Scatter(
-            x=df_subset['timeline_numeric'],
-            y=df_subset['potential_numeric'],
-            mode='markers',
-            marker=dict(
-                size=df_subset['size'],
-                color=colors.get(scalability, '#fafafa'),
-                opacity=0.7
-            ),
-            text=df_subset['name'],
-            name=f'{scalability} Scalability',
-            hovertemplate='<b>%{text}</b><br>Timeline: %{x:.1f} years<br>Potential: %{y:.0f}%<br>Scalability: ' + scalability + '<extra></extra>'
-        ))
-    
-    fig_interventions.update_layout(
-        title="Intervention Potential vs Timeline",
-        xaxis_title="Implementation Timeline (years)",
-        yaxis_title="Emission Reduction Potential (%)",
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
-    )
-    
-    st.plotly_chart(fig_interventions, use_container_width=True)
-
-with col2:
-    st.markdown("### Available Interventions")
-    for intervention in selected_data['key_interventions']:
-        with st.expander(f"🔧 {intervention['name']}"):
-            st.write(f"**Potential**: {intervention['potential']} emission reduction")
-            st.write(f"**Timeline**: {intervention['timeline']} to implement")
-            st.write(f"**Scalability**: {intervention['scalability']}")
-
-# Research urgency matrix with fixed scatter plot
-st.subheader("🎯 Research Priority: Why This Matters Now")
-
-urgency_col1, urgency_col2 = st.columns([2, 1])
-
-with urgency_col1:
-    # Create urgency matrix with proper data handling
-    industries_list = list(residual_industry_data.keys())
-    scope3_percentages = [data['scope3_percentage'] for data in residual_industry_data.values()]
-    guidance_gaps = [100 - data['illustrative_scenarios']['conservative_max_reduction'] - 11 
-                    for data in residual_industry_data.values()]
-    
-    fig_urgency = go.Figure()
-    
-    fig_urgency.add_trace(go.Scatter(
-        x=scope3_percentages,
-        y=guidance_gaps,
-        mode='markers+text',
-        text=[ind.replace(' ', '<br>') for ind in industries_list],
-        textposition="top center",
-        marker=dict(size=15, color='#00D4AA', opacity=0.7),
-        hovertemplate='<b>%{text}</b><br>Scope 3: %{x}%<br>Threshold Gap: %{y:.1f}pp<extra></extra>'
-    ))
-    
-    fig_urgency.update_layout(
-        title="Research Urgency Matrix",
-        xaxis_title="Scope 3 Dominance (%)",
-        yaxis_title="Static Threshold Gap (percentage points)",
-        height=400,
-        paper_bgcolor='#0e1117',
-        plot_bgcolor='#0e1117',
-        font=dict(color='#fafafa'),
-        xaxis=dict(color='#fafafa', gridcolor='#444444'),
-        yaxis=dict(color='#fafafa', gridcolor='#444444')
-    )
-    
-    # Add quadrant annotations
-    fig_urgency.add_hline(y=0, line_dash="dash", line_color="#464457")
-    fig_urgency.add_vline(x=80, line_dash="dash", line_color="#464457")
-    
-    fig_urgency.add_annotation(
-        x=95, y=15, 
-        text="HIGH PRIORITY:<br>High Scope 3 + Large Gap", 
-        bgcolor="rgba(211, 47, 47, 0.8)", 
-        bordercolor="#FF4B4B", 
-        borderwidth=1,
-        font=dict(color='#fafafa')
-    )
-    
-    st.plotly_chart(fig_urgency, use_container_width=True)
-
-with urgency_col2:
-    st.markdown("### Research Impact")
-    
-    current_gap = abs(conservative_residual - static_residual)
-    
-    st.metric("Static Threshold Error", f"{current_gap:.1f}%", 
-             help="Difference between industry reality and SBTi assumption")
-    
-    st.markdown(f"""
-    **Business Impact:**
-    - **Planning uncertainty**: ${abs(conservative_cost - static_cost):,.0f}/year
-    - **Investment misallocation**: Decarbonization vs. removals
-    - **Climate integrity risk**: Premature offset reliance
-    - **Competitive disadvantage**: Suboptimal resource allocation
-    """)
-    
-    st.success(f"""
-    **RF2 Solution Value:**
-    - Science-based residual thresholds
-    - Dynamic technology adjustment  
-    - Industry-specific investment optimization
-    - Authentic climate accountability
-    """)
-
-# Dynamic timeline visualization with dark theme
-st.subheader("🕒 Evolution Timeline: From Static to Dynamic Residuals")
-
-timeline_years = list(range(2025, 2051))
-selected_scenarios = selected_data['illustrative_scenarios']
-
-# Create dynamic timeline showing residual evolution
-fig_timeline = go.Figure()
-
-# Static line (SBTi approach)
-static_line = [11] * len(timeline_years)
-fig_timeline.add_trace(go.Scatter(
-    x=timeline_years, y=static_line,
-    mode='lines',
-    name='SBTi Static 11%',
-    line=dict(color='#FF4B4B', dash='dash', width=3),
-    hovertemplate='<b>SBTi Static Approach</b><br>Year: %{x}<br>Residual: %{y}%<extra></extra>'
-))
-
-# Dynamic sigmoid curves for different scenarios
-def sigmoid_residual(year, max_reduction, inflection_year=2035, steepness=0.3):
-    """Create sigmoid curve showing residual emissions evolution"""
-    t = year - 2025  # Start from 2025
-    inflection_t = inflection_year - 2025
-    base_residual = 100 - max_reduction
-    
-    # Start higher and approach the limit asymptotically
-    current_residual = base_residual + (25 - base_residual) * np.exp(-steepness * (t - 5))
-    return max(base_residual, min(25, current_residual))
-
-# Conservative scenario
-conservative_residuals = [sigmoid_residual(year, selected_scenarios['conservative_max_reduction']) 
-                         for year in timeline_years]
-fig_timeline.add_trace(go.Scatter(
-    x=timeline_years, y=conservative_residuals,
-    mode='lines',
-    name='Conservative RF2',
-    line=dict(color='#FF8C00', width=2),
-    hovertemplate='<b>Conservative RF2</b><br>Year: %{x}<br>Residual: %{y:.1f}%<extra></extra>'
-))
-
-# Ambitious scenario  
-ambitious_residuals = [sigmoid_residual(year, selected_scenarios['ambitious_max_reduction']) 
-                      for year in timeline_years]
-fig_timeline.add_trace(go.Scatter(
-    x=timeline_years, y=ambitious_residuals,
-    mode='lines',
-    name='Ambitious RF2',
-    line=dict(color='#00D4AA', width=2),
-    hovertemplate='<b>Ambitious RF2</b><br>Year: %{x}<br>Residual: %{y:.1f}%<extra></extra>'
-))
-
-# Breakthrough scenario
-breakthrough_residuals = [sigmoid_residual(year, selected_scenarios['breakthrough_max_reduction']) 
-                         for year in timeline_years]
-fig_timeline.add_trace(go.Scatter(
-    x=timeline_years, y=breakthrough_residuals,
-    mode='lines',
-    name='Breakthrough RF2',
-    line=dict(color='#1f77b4', width=2),
-    hovertemplate='<b>Breakthrough RF2</b><br>Year: %{x}<br>Residual: %{y:.1f}%<extra></extra>'
-))
-
-fig_timeline.update_layout(
-    title=f"{selected_industry}: Static vs Dynamic Residual Emissions (2025-2050)",
-    xaxis_title="Year",
-    yaxis_title="Residual Emissions (%)",
-    height=500,
-    hovermode='x unified',
-    paper_bgcolor='#0e1117',
-    plot_bgcolor='#0e1117',
-    font=dict(color='#fafafa'),
-    xaxis=dict(color='#fafafa', gridcolor='#444444'),
-    yaxis=dict(color='#fafafa', gridcolor='#444444'),
-    legend=dict(font=dict(color='#fafafa'))
-)
-
-# Add key milestone annotations
-fig_timeline.add_annotation(
-    x=2030, y=20,
-    text="2030: Technology<br>deployment accelerates",
-    showarrow=True,
-    arrowhead=2,
-    font=dict(color='#fafafa')
-)
-
-fig_timeline.add_annotation(
-    x=2040, y=8,
-    text="2040: Maximum potential<br>constraints emerge",
-    showarrow=True,
-    arrowhead=2,
-    font=dict(color='#fafafa')
-)
-
-st.plotly_chart(fig_timeline, use_container_width=True)
 
 # Key insights and conclusions
 st.subheader("🔑 Why Static 11% Residuals Don't Make Scientific Sense")
@@ -1052,57 +540,6 @@ Systematic development of industry-specific residual thresholds can transform co
 from arbitrary compliance to scientifically-grounded climate action aligned with planetary realities.
 """)
 
-# Footer with methodology and citations
-st.markdown("---")
-st.markdown("""
-### 📚 Methodology and Data Sources
-
-**This analysis demonstrates the critical need for RF4 research using:**
-
-**Real Corporate Data:**
-- CDP Technical Note: Relevance of Scope 3 Categories by Sector (2022)
-- Science Based Targets initiative corporate database (7,000+ companies)
-- Net-Zero Data Public Utility (NZDPU) comprehensive emissions database
-
-**Scientific Foundations:**
-- IPCC AR6 Working Group III: Mitigation of Climate Change (2022)
-- IEA Net Zero by 2050 Roadmap (2021, updated 2023)
-- Academic literature on industrial decarbonization pathways
-
-**Limitations and Disclaimers:**
-- Industry-specific residual percentages are **illustrative scenarios** based on literature review
-- Actual RF4 research would require systematic technical analysis and corporate collaboration
-- This tool demonstrates **problem complexity** rather than providing definitive residual thresholds
-- Investment calculations use simplified assumptions for demonstration purposes
-
-**Research Citation:**
-This analysis supports the research framework proposed in "Operationalizing corporate climate action 
-through five research frontiers" (submitted to Nature Sustainability, 2024), specifically Research 
-Frontier 4: Industry-specific residual emissions quantification.
-""")
-
-# About the research team
-with st.expander("👥 About the Research Team"):
-    st.markdown("""
-    **Foundation for Planetary Action** develops science-based frameworks for corporate climate action 
-    through systematic research that bridges climate science with business implementation.
-    
-    **Our Approach:**
-    - Rigorous scientific methodology grounded in IPCC assessments
-    - Real corporate data analysis using CDP and SBTi databases  
-    - Collaborative development with industry partners
-    - Open-source tools and transparent methodologies
-    
-    **Research Frontiers:**
-    - RF1: Industry-specific emission accounting 
-    - RF2: Science-aligned target setting (demonstrated in companion tool)
-    - RF3: Progress verification and tracking
-    - RF4: Residual emissions quantification (this tool)
-    - RF5: Climate risk and cost of inaction assessment
-    
-    **Mission:** Transform corporate climate action from fragmented voluntary initiatives 
-    to systematic, science-backed strategies that demonstrably contribute to global net-zero transitions.
-    """)
-
+# Footer
 st.markdown("---")
 st.markdown("*Developed by Foundation for Planetary Action | © 2024 | Open source research tools for climate action*")
