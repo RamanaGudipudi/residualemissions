@@ -1,9 +1,16 @@
 import streamlit as st
-import plotly.graph_objects as go
-import plotly.express as px
 import pandas as pd
 import numpy as np
-from plotly.subplots import make_subplots
+
+# Try-except for plotly imports to handle compatibility issues
+try:
+    import plotly.graph_objects as go
+    import plotly.express as px
+    from plotly.subplots import make_subplots
+except ImportError as e:
+    st.error(f"Error importing plotly: {e}")
+    st.error("Please make sure plotly is properly installed")
+    st.stop()
 
 # Set page config
 st.set_page_config(
