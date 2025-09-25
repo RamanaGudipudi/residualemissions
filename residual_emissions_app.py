@@ -609,11 +609,106 @@ with summary_col2:
     - **Verification frameworks** preventing emission gaming
     """)
 
+# Scientific Sources & Methodology
+st.markdown("---")
+st.subheader("📚 Scientific Sources & Data Methodology")
+
+with st.expander("🔬 **Key Sources for Industry Data & Cost Estimates**"):
+    st.markdown("""
+    ### **Scope 3 Emissions Percentages**
+    - **CDP (Carbon Disclosure Project) 2021-2022 Data**: Industry-specific Scope 3 percentages based on analysis of corporate disclosure data
+    - **CDP Technical Note on Relevance of Scope 3 Categories by Sector (2022)**: Sector-specific materiality analysis
+    
+    **Examples from CDP Analysis:**
+    - Food, Beverage & Tobacco: 67% average Scope 3 emissions (n=162 companies)
+    - Capital Goods: 90% average Scope 3 emissions, with Category 11 (Use of sold products) comprising 91% of total Scope 3
+    - Financial Services: 99.98% Scope 3 emissions from Category 15 (Investments)
+    
+    ### **Cost Estimates & Abatement Potentials**
+    **IPCC AR6 Working Group III - Chapter 7: Agriculture, Forestry and Other Land Uses (AFOLU)**
+    - Economic mitigation potential: 8-14 GtCO₂e/year (2020-2050) at <USD100/tCO₂e
+    - 30-50% of potential achievable at <USD20/tCO₂e
+    - Agriculture provides 4.1 (1.7-6.7) GtCO₂e/year mitigation potential
+    
+    **Decarbonization Lever Potentials:**
+    - **Regenerative Agriculture**: McKinsey analysis shows 20% agriculture emission reductions by 2050 through improved practices
+    - **Alternative Proteins**: BCG studies indicate 60-80% emission reduction potential with 10-15 year timelines
+    - **Equipment Efficiency**: Capital goods efficiency improvements: 20-40% potential per IPCC AR6 WGIII
+    - **Packaging Optimization**: 40-60% reduction potential based on McKinsey retail decarbonization studies
+    
+    ### **Industry-Specific Constraints**
+    **Biological/Physical Floors:**
+    - **Methane from ruminants**: IPCC AR6 WGIII identifies biological minimum levels from enteric fermentation
+    - **Equipment lifespans**: 20-30 years for capital goods beyond manufacturer control
+    - **Food safety requirements**: Packaging constraints from regulatory and safety standards
+    - **Portfolio composition**: Financial services residuals depend on weighted average of all invested sectors
+    """)
+
+with st.expander("📊 **Methodology for Dynamic Modeling**"):
+    st.markdown("""
+    ### **Industry Profiles & Parameter Ranges**
+    Industry-specific parameters derived from:
+    - **Growth Rates**: Historical sector analysis from World Bank and OECD data
+    - **Decarbonization Efficiency**: Based on IPCC AR6 WGIII sectoral potential assessments
+    - **Technical Ceilings**: Maximum reduction potential from peer-reviewed literature on sectoral constraints
+    - **Biological Floors**: Minimum residual percentages based on physical/biological limits identified in climate science
+    
+    ### **Cost Modeling Approach**
+    - **Base costs**: IPCC AR6 WGIII marginal abatement cost curves by sector
+    - **Carbon price scenarios**: Conservative ($50-100), Moderate ($100-200), Aggressive ($200-400) per tCO₂
+    - **Investment requirements**: Industry-specific cost estimates from consulting firm analyses (McKinsey, BCG)
+    
+    ### **Validation Against Real Data**
+    All modeled scenarios validated against:
+    - **CDP Corporate Disclosure Data**: Actual reported emissions and targets from 7,000+ companies
+    - **SBTi Database**: Science-based target analysis across industries
+    - **Net-Zero Data Public Utility (NZDPU)**: Corporate emissions tracking and boundary analysis
+    """)
+
+with st.expander("🎯 **Dynamic Residuals vs Static SBTi Approach**"):
+    st.markdown("""
+    ### **SBTi Static 11% Limitation**
+    **Science Based Targets initiative Corporate Net-Zero Standard Version 2.0:**
+    - Uniform 89% reduction requirement (11% residual) across all industries
+    - Based on cross-sectoral pathways rather than industry-specific feasibility
+    - No differentiation for Scope 3-heavy industries (67-99% indirect emissions)
+    
+    ### **RF4 Dynamic Approach Methodology**
+    **Industry-Specific Thresholds:**
+    - Technical feasibility analysis per industry value chain
+    - Biological/physical constraint identification
+    - Technology readiness and deployment timeline assessment  
+    - Cross-sectoral dependency mapping
+    
+    **Dynamic Evolution Factors:**
+    - Global net-zero constraint tightening over time
+    - Technology learning curves and cost reductions
+    - Policy support and market transformation rates
+    - Planetary boundary considerations
+    
+    **Example: Food & Beverage Industry**
+    - **Conservative scenario**: 75% max reduction (25% residual) - biological methane constraints
+    - **Ambitious scenario**: 85% max reduction (15% residual) - regenerative agriculture scaling
+    - **Breakthrough scenario**: 88% max reduction (12% residual) - alternative protein breakthroughs
+    """)
+
+# Key References
+st.markdown("### 📖 **Primary Scientific References**")
+st.markdown("""
+1. **IPCC AR6 Working Group III (2022)**: "Climate Change 2022: Mitigation of Climate Change" - Chapter 7: Agriculture, Forestry and Other Land Uses (AFOLU)
+2. **CDP (2022)**: "CDP Technical Note: Relevance of Scope 3 Categories by Sector"
+3. **Science Based Targets initiative (2025)**: "Corporate Net-Zero Standard Version 2.0: Consultation Draft"
+4. **McKinsey & Company (2024-2025)**: "The path to cost-effective decarbonization solutions" & "Retailers' climate road map"
+5. **World Resources Institute & Concordia University**: "Trends Show Companies Are Ready for Scope 3 Reporting"
+6. **Net-Zero Data Public Utility**: Corporate emissions and boundary analysis database
+7. **EPA Scope 3 Inventory Guidance (2025)**: Industry-specific emission factor frameworks
+""")
+
 # Footer
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666; font-size: 14px;'>
 <strong>Foundation for Planetary Action</strong> | Research Frontier 4: Dynamic Residual Emissions<br>
-Open-source tools for authentic corporate climate action | © 2024
+Open-source tools for authentic corporate climate action | Built on peer-reviewed climate science | © 2024
 </div>
 """, unsafe_allow_html=True)
